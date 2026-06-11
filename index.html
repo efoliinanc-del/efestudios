@@ -3,269 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Efe Studios | Resmi Web Sitesi</title>
+    <title>Efe Studios | Official Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #131a26;
-            --accent-color: #3b82f6;
-            --accent-glow: #2563eb;
-            --text-color: #f1f5f9;
-            --text-muted: #94a3b8;
+            --bg-base: #030712;
+            --bg-surface: rgba(17, 24, 39, 0.7);
+            --bg-surface-hover: rgba(31, 41, 55, 0.8);
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --accent-purple: #a855f7;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --glow-cyan: rgba(6, 182, 212, 0.15);
+            --border-color: rgba(255, 255, 255, 0.05);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-base);
+            color: var(--text-main);
             overflow-x: hidden;
-            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0b0f19 100%);
+            position: relative;
+            min-height: 100vh;
         }
 
-        /* Havalı Arka Plan Grid Efekti */
-        body::before {
-            content: "";
-            position: absolute;
+        /* Arka Plan Neon Işımaları */
+        .bg-glow-1 {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .bg-glow-2 {
+            position: fixed;
+            bottom: -10%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .cyber-grid {
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(18, 24, 38, 0.2) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(18, 24, 38, 0.2) 1px, transparent 1px);
-            background-size: 30px 30px;
+            background-image: linear-gradient(var(--border-color) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 50px 50px;
             z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
         }
 
+        /* Üst Menü */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 5%;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 8%;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: var(--text-color);
-            text-shadow: 0 0 10px var(--accent-color);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #fff 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .logo span {
-            color: var(--accent-color);
+        .logo::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+            border-radius: 2px;
         }
 
-        /* Hero Alanı (Giriş) */
+        .status-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.06);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+            letter-spacing: 1px;
+        }
+
+        .status-badge i {
+            margin-right: 6px;
+            animation: pulse-green 2s infinite;
+        }
+
+        /* Giriş (Hero) Alanı */
         .hero {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 6rem 1rem;
-            min-height: 70vh;
+            padding: 8rem 2rem 5rem 2rem;
+            min-height: 65vh;
+            position: relative;
+        }
+
+        .hero-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 1.5rem;
+            background: rgba(6, 182, 212, 0.08);
+            padding: 0.4rem 1.2rem;
+            border-radius: 4px;
+            border: 1px solid rgba(6, 182, 212, 0.15);
         }
 
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #fff, var(--text-muted));
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 30%, #9ca3af 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: pulse 3s infinite alternate;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 2rem;
-            font-family: 'Share Tech Mono', monospace;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, var(--accent-color), var(--accent-glow));
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
-        }
-
-        /* Projeler Bölümü */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
+            max-width: 650px;
+            line-height: 1.8;
             margin-bottom: 3rem;
-            position: relative;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px; left: 50%;
-            transform: translateX(-50%);
-            width: 50px; height: 3px;
-            background-color: var(--accent-color);
-            box-shadow: 0 0 10px var(--accent-color);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            transform: translateX(-100%);
-            transition: 0.5s;
-        }
-
-        .project-card:hover::before {
-            transform: translateX(100%);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(59, 130, 246, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .project-icon {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .project-card h3 {
+        .scroll-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            margin-top: 2rem;
         }
 
-        .project-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+        .scroll-btn:hover {
+            color: var(--accent-cyan);
         }
 
-        .project-link {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.3s;
+        /* Projeler Konteyner */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 5rem 4rem 10rem 4rem;
         }
 
-        .project-link:hover {
-            color: var(--accent-color);
+        .section-header {
+            margin-bottom: 4rem;
+            position: relative;
         }
 
-        footer {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-family: 'Share Tech Mono', monospace;
-        }
-
-        /* Küçük Animasyonlar */
-        @keyframes pulse {
-            from { text-shadow: 0 0 10px rgba(255,255,255,0.1); }
-            to { text-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="logo">EFE <span>STUDIOS</span></div>
-        <div class="status-badge" style="font-family: 'Share Tech Mono'; color: #10b981;">
-            <i class="fa-solid fa-circle-check"></i> ALL SYSTEMS OPERATIONAL
-        </div>
-    </header>
-
-    <section class="hero">
-        <h1>BUILDING THE FUTURE</h1>
-        <p>>_ Gelişmiş bot yazılımları, veri analiz sistemleri ve dinamik web servisleri ile dijital dünyayı şekillendiriyoruz.</p>
-        <a href="#projects" class="btn">Projeleri Keşfet</a>
-    </section>
-
-    <section class="container" id="projects">
-        <h2 class="section-title">Neler Yapıyoruz?</h2>
-        <div class="projects-grid">
-
-            <div class="project-card">
-                <div class="project-icon"><i class="fa-solid fa-map-location-dot"></i></div>
-                <h3>kesintivar.com</h3>
-                <p>İstanbul genelindeki anlık elektrik ve su kesintilerini canlı harita ve filtreleme algoritmasıyla anında listeleyen gelişmiş web servisi.</p>
-                <a href="#" class="project-link">Canlı Uygulama <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon"><i class="fa-solid fa-robot"></i></div>
-                <h3>EfeBot (ABRPSBOT)</h3>
-                <p>C# WPF mimarisi üzerine kurulu, Windows sistem tepsisinde (system tray) 7/24 sessizce çalışabilen gelişmiş Discord bot yönetim altyapısı.</p>
-                <a href="#" class="project-link">Detayları Gör <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-
-            <div class="project-card">
-                <div class="project-icon"><i class="fa-solid fa-gamepad"></i></div>
-                <h3>Game Development</h3>
-                <p>Lua tabanlı özel oyun mekanikleri, simülasyon sistemleri ve topluluk odaklı dijital deneyim tasarımları.</p>
-                <a href="#" class="project-link">Yakında <i class="fa-solid fa-hourglass-half"></i></a>
-            </div>
-
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Efe Studios. Tüm Hakları Saklıdır. Telif hakları sonsuza dek burada kalacak.</p>
-    </footer>
-
-</body>
-</html>
+        .section-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2
