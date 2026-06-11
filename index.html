@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efe Studios | Official Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #05070c;          /* Lacivertlikten tamamen arındırılmış, gece siyahı taban */
-            --bg-surface: #0e131f;       /* Kartların içi koyu siber gri */
-            --bg-surface-hover: #151d2f; /* Hover olunca hafif açılan kart içi */
+            --bg-base: #060913;          /* Temiz karanlık arka plan */
+            --bg-surface: #0d1220;       /* Kart arka planı */
+            --bg-surface-hover: #131a2e; /* Hafif hover rengi */
             --accent-cyan: #06b6d4;
             --accent-blue: #3b82f6;
             --accent-purple: #a855f7;
             --accent-orange: #f97316;
             --text-main: #f9fafb;
-            --text-muted: #9ca3af;
-            --border-color: rgba(255, 255, 255, 0.04);
+            --text-muted: #8ca3ba;
+            --border-color: rgba(255, 255, 255, 0.05);
         }
 
         * {
@@ -25,7 +25,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
@@ -36,49 +35,24 @@
             min-height: 100vh;
         }
 
-        /* Arka Plan Görsel Katmanları (Düz lacivert görüntüyü kıran alanlar) */
-        .bg-glow-1 {
-            position: fixed;
-            top: -10%;
-            left: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        .bg-glow-2 {
-            position: fixed;
-            bottom: -10%;
-            right: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        /* Daha belirgin siber grid çizgileri */
+        /* Hafif ve Performanslı Arka Plan Izgarası */
         .cyber-grid {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Üst Menü */
+        /* Üst Menü - Efektsiz, Performanslı */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 8%;
-            background: rgba(5, 7, 12, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: #060913;
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
@@ -89,41 +63,24 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.6rem;
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            background: linear-gradient(90deg, #fff 0%, var(--accent-cyan) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            color: var(--text-main);
         }
 
-        .logo::before {
-            content: '';
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--accent-cyan);
-            border-radius: 2px;
+        .logo span {
+            color: var(--accent-cyan);
         }
 
         .status-badge {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
             color: #10b981;
-            background: rgba(16, 185, 129, 0.06);
+            background: rgba(16, 185, 129, 0.05);
             border: 1px solid rgba(16, 185, 129, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
             letter-spacing: 1px;
-        }
-
-        .status-badge i {
-            margin-right: 6px;
-            animation: pulse-green 2s infinite;
         }
 
         /* Giriş (Hero) Alanı */
@@ -133,27 +90,243 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 8rem 2rem 5rem 2rem;
-            min-height: 65vh;
-            position: relative;
+            padding: 6rem 2rem 4rem 2rem;
+            min-height: 50vh;
         }
 
         .hero-tag {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--accent-cyan);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 1.5rem;
-            background: rgba(6, 182, 212, 0.08);
-            padding: 0.4rem 1.2rem;
-            border-radius: 4px;
-            border: 1px solid rgba(6, 182, 212, 0.15);
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
         }
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 4.5rem;
+            font-size: 3.8rem;
             font-weight: 900;
             letter-spacing: -1px;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        /* Projeler Konteyner */
+        .main-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem 4rem 6rem 4rem;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+
+        /* 4'lü Temiz Grid Sistemi */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .cyber-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* Ağır animasyonlar yerine sadece basit renk geçişi */
+        .cyber-card:hover {
+            transform: translateY(-4px);
+            background: var(--bg-surface-hover);
+            border-color: var(--accent-color);
+        }
+
+        /* Proje Kartı Renk Atamaları (Sadece kenarlık için) */
+        .card-kesinti { --accent-color: var(--accent-cyan); }
+        .card-bot { --accent-color: var(--accent-blue); }
+        .card-game { --accent-color: var(--accent-purple); }
+        .card-download { --accent-color: var(--accent-orange); }
+
+        .card-icon-wrapper {
+            font-size: 1.8rem;
+            color: var(--accent-color);
             margin-bottom: 1.5rem;
+        }
+
+        .cyber-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: #ffffff;
+        }
+
+        .cyber-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        /* Uh Oh Durum Mesajı Stili */
+        .empty-state-text {
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.85rem !important;
+            color: #ef4444 !important;
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px dashed rgba(239, 68, 68, 0.2);
+            padding: 0.6rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .action-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+        }
+
+        .cyber-card:hover .action-link {
+            color: var(--accent-color);
+        }
+
+        /* Alt Bilgi */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            background: #060913;
+        }
+
+        footer p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Ekran Boyut Ayarları */
+        @media (max-width: 1200px) {
+            .grid-layout { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout { grid-template-columns: 1fr; }
+            .main-container { padding: 2rem 1.5rem; }
+            .hero h1 { font-size: 2.2rem; }
+            header { padding: 1rem 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cyber-grid"></div>
+
+    <header>
+        <div class="logo">Efe <span>Studios</span></div>
+        <div class="status-badge">
+            <i class="fa-solid fa-bolt-lightning"></i> SYSTEM ONLINE
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-tag">[ CORE DEV HUB ]</div>
+        <h1>BUILDING THE FUTURE</h1>
+        <p>Gelişmiş bot mimarileri, veri analiz motorları ve dinamik web servisleri ile dijital ekosistemi tasarlıyoruz.</p>
+    </section>
+
+    <main class="main-container">
+        <div class="section-header">
+            <h2>INFRASTRUCTURE</h2>
+        </div>
+
+        <div class="grid-layout">
+            <div class="cyber-card card-kesinti">
+                <div>
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3>kesintivar.com</h3>
+                    <p>İstanbul genelindeki anlık şebeke ve altyapı kesintilerini akıllı arama motoru ve dinamik harita entegrasyonu ile listeleyen web servisi.</p>
+                </div>
+                <a href="https://kesintivar.vercel.app" target="_blank" class="action-link">
+                    Sisteme Bağlan <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+
+            <div class="cyber-card card-bot">
+                <div>
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-terminal"></i>
+                    </div>
+                    <h3>EfeBot</h3>
+                    <p>C# WPF mimarisi üzerine inşa edilmiş, Windows sistem tepsisinde (system tray) 7/24 sessiz arka plan operasyonları gerçekleştirebilen Discord bot altyapısı.</p>
+                </div>
+                <a href="#" class="action-link">
+                    Terminali İncele <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="cyber-card card-game">
+                <div>
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h3>Game Dev</h3>
+                    <p>Lua tabanlı özel sunucu mekanizmaları, gerçeğe yakın fizik/simülasyon sistemleri ve topluluk odaklı interaktif deneyimler.</p>
+                </div>
+                <a href="https://www.roblox.com/tr/communities/16877305/EFE-STUD-OS#!/about" target="_blank" class="action-link">
+                    Gruba Katıl <i class="fa-solid fa-users"></i>
+                </a>
+            </div>
+
+            <div class="cyber-card card-download">
+                <div>
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-download"></i>
+                    </div>
+                    <h3>Downloads</h3>
+                    <p class="empty-state-text">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Uh Oh, Burası Boş Gözüküyor...
+                    </p>
+                </div>
+                <a href="#" class="action-link" style="opacity: 0.4; pointer-events: none;">
+                    Arşiv Kilitli <i class="fa-solid fa-lock"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Efe Studios. Tüm hakları saklıdır. Telif hakları sonsuza dek burada kalacak.</p>
+    </footer>
+
+</body>
+</html>
