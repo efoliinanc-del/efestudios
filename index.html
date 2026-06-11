@@ -15,6 +15,7 @@
             --accent-blue: #3b82f6;
             --accent-purple: #a855f7;
             --accent-orange: #f97316;
+            --accent-discord: #5865F2;  /* Orijinal Discord Rengi */
             --text-main: #f9fafb;
             --text-muted: #8ca3ba;
             --border-color: rgba(255, 255, 255, 0.05);
@@ -46,7 +47,7 @@
             pointer-events: none;
         }
 
-        /* Üst Menü - Efektsiz, Performanslı */
+        /* Üst Menü */
         header {
             display: flex;
             justify-content: space-between;
@@ -72,6 +73,27 @@
             color: var(--accent-cyan);
         }
 
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Discord Butonu */
+        .discord-btn {
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            text-decoration: none;
+            transition: color 0.2s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .discord-btn:hover {
+            color: var(--accent-discord);
+            transform: scale(1.1);
+        }
+
         .status-badge {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
@@ -91,7 +113,7 @@
             justify-content: center;
             text-align: center;
             padding: 6rem 2rem 4rem 2rem;
-            min-height: 50vh;
+            min-height: 45vh;
         }
 
         .hero-tag {
@@ -122,7 +144,7 @@
         .main-container {
             max-width: 1440px;
             margin: 0 auto;
-            padding: 2rem 4rem 6rem 4rem;
+            padding: 2rem 4rem 4rem 4rem;
         }
 
         .section-header {
@@ -142,6 +164,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
+            margin-bottom: 5rem;
         }
 
         .cyber-card {
@@ -153,16 +176,16 @@
             flex-direction: column;
             justify-content: space-between;
             position: relative;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
         }
 
-        /* Ağır animasyonlar yerine sadece basit renk geçişi */
         .cyber-card:hover {
             transform: translateY(-4px);
             background: var(--bg-surface-hover);
             border-color: var(--accent-color);
         }
 
-        /* Proje Kartı Renk Atamaları (Sadece kenarlık için) */
+        /* Proje Kartı Renk Atamaları */
         .card-kesinti { --accent-color: var(--accent-cyan); }
         .card-bot { --accent-color: var(--accent-blue); }
         .card-game { --accent-color: var(--accent-purple); }
@@ -217,6 +240,64 @@
             color: var(--accent-color);
         }
 
+        /* Hakkımızda Bölümü - Performans Odaklı */
+        .about-section {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 3rem;
+            margin-top: 2rem;
+        }
+
+        .about-block {
+            margin-bottom: 2rem;
+        }
+
+        .about-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .about-section p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .about-list {
+            list-style: none;
+        }
+
+        .about-list li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .about-list li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+        }
+
+        .about-list strong {
+            color: #ffffff;
+        }
+
         /* Alt Bilgi */
         footer {
             border-top: 1px solid var(--border-color);
@@ -241,7 +322,8 @@
             .grid-layout { grid-template-columns: 1fr; }
             .main-container { padding: 2rem 1.5rem; }
             .hero h1 { font-size: 2.2rem; }
-            header { padding: 1rem 5%; }
+            header { padding: 1rem 5%; flex-direction: column; gap: 1rem; }
+            .about-section { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -251,8 +333,13 @@
 
     <header>
         <div class="logo">Efe <span>Studios</span></div>
-        <div class="status-badge">
-            <i class="fa-solid fa-bolt-lightning"></i> SYSTEM ONLINE
+        <div class="header-right">
+            <a href="https://discord.gg/JR2xPEZZy4" target="_blank" class="discord-btn" title="Discord Sunucumuza Katıl">
+                <i class="fa-brands fa-discord"></i>
+            </a>
+            <div class="status-badge">
+                <i class="fa-solid fa-bolt-lightning"></i> SYSTEM ONLINE
+            </div>
         </div>
     </header>
 
@@ -300,7 +387,7 @@
                         <i class="fa-solid fa-gamepad"></i>
                     </div>
                     <h3>Game Dev</h3>
-                    <p>Lua tabanlı özel sunucu mekanizmaları, gerçeğe yakın fizik/simülasyon sistemleri ve topluluk odaklı interaktif deneyimler.</p>
+                    <p>Lua tabanlı özel sunucu mekanizmaları, gerçeğe yakın fizik/simülasyon sistemleri ve topluluk odaklı yeni nesil interaktif deneyimler.</p>
                 </div>
                 <a href="https://www.roblox.com/tr/communities/16877305/EFE-STUD-OS#!/about" target="_blank" class="action-link">
                     Gruba Katıl <i class="fa-solid fa-users"></i>
@@ -322,10 +409,34 @@
                 </a>
             </div>
         </div>
+
+        <div class="section-header">
+            <h2>ABOUT US</h2>
+        </div>
+        <div class="about-section">
+            <div class="about-block">
+                <div class="about-subtitle">[ BACKSTORY & CORE VISION ]</div>
+                <p>Efe Studios; kalıplara sıkışmayı reddeden, backend mimarisinden oyun mekaniklerine kadar geniş bir dijital yelpazede kendi kendini yetiştirmiş bağımsız bir geliştirici vizyonuyla kuruldu. Amacımız; sadece kod yazmak değil, gerçek dünya problemlerine dinamik çözümler üretmek ve toplulukları bir araya getiren interaktif dijital deneyimler inşa etmektir.</p>
+            </div>
+
+            <div class="about-block">
+                <div class="about-subtitle">[ PROJECTS & SERVICES ]</div>
+                <ul class="about-list">
+                    <li><strong>Veri Motorları ve Web Servisleri:</strong> İstanbul genelindeki anlık altyapı ve şebeke kesintilerini tek bir akıllı harita üzerinde toplayan, kullanıcı dostu çözümleriyle öne çıkan kesintivar.com altyapısını geliştirdik.</li>
+                    <li><strong>Sistem ve Bot Mimarisi:</strong> Arka planda 7/24 sessizce ve tam kararlı altyapıyla çalışabilen, Windows sistem tepsisi (system tray) entegrasyonuna sahip, C# (WPF) tabanlı gelişmiş Discord bot yönetim yazılımı EfeBot projesini sıfırdan inşa ettik.</li>
+                    <li><strong>Topluluk Odaklı Oyun Geliştirme:</strong> Lua programlama diliyle simülasyon ve interaktif oyun mekanikleri üretiyor, Roblox ekosisteminde geniş kitleleri bir araya getiren topluluk gruplarını yönetiyoruz.</li>
+                </ul>
+            </div>
+
+            <div class="about-block">
+                <div class="about-subtitle">[ INFRASTRUCTURE & TECH STACK ]</div>
+                <p>Projelerimizi geliştirirken performans ve sürekliliği ön plandı tutuyoruz. Geliştirme süreçlerimizde C# (WPF), Lua, Golang ve Node.js gibi güçlü dilleri harmanlıyor; sistemlerimizin 7/24 ayakta kalması için bulut altyapılarının yanı sıra kendi özel donanım ve yerel sunucu istasyonlarımızı aktif olarak kullanıyoruz.</p>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Efe Studios. Tüm hakları saklıdır. Telif hakları sonsuza dek burada kalacak.</p>
+        <p>&copy; 2026 Efe Studios. Tüm hakları saklıdır.</p>
     </footer>
 
 </body>
