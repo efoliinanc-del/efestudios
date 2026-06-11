@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efe Studios | Resmi Web Sitesi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #131a26;
+            --accent-color: #3b82f6;
+            --accent-glow: #2563eb;
+            --text-color: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0b0f19 100%);
+        }
+
+        /* Havalı Arka Plan Grid Efekti */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(18, 24, 38, 0.2) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(18, 24, 38, 0.2) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        /* Hero Alanı (Giriş) */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 1rem;
+            min-height: 70vh;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 3s infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2rem;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, var(--accent-color), var(--accent-glow));
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+        }
+
+        /* Projeler Bölümü */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; left: 50%;
+            transform: translateX(-50%);
+            width: 50px; height: 3px;
+            background-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .project-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+
+        .project-link:hover {
+            color: var(--accent-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* Küçük Animasyonlar */
+        @keyframes pulse {
+            from { text-shadow: 0 0 10px rgba(255,255,255,0.1); }
+            to { text-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">EFE <span>STUDIOS</span></div>
+        <div class="status-badge" style="font-family: 'Share Tech Mono'; color: #10b981;">
+            <i class="fa-solid fa-circle-check"></i> ALL SYSTEMS OPERATIONAL
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>BUILDING THE FUTURE</h1>
+        <p>>_ Gelişmiş bot yazılımları, veri analiz sistemleri ve dinamik web servisleri ile dijital dünyayı şekillendiriyoruz.</p>
+        <a href="#projects" class="btn">Projeleri Keşfet</a>
+    </section>
+
+    <section class="container" id="projects">
+        <h2 class="section-title">Neler Yapıyoruz?</h2>
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <div class="project-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <h3>kesintivar.com</h3>
+                <p>İstanbul genelindeki anlık elektrik ve su kesintilerini canlı harita ve filtreleme algoritmasıyla anında listeleyen gelişmiş web servisi.</p>
+                <a href="#" class="project-link">Canlı Uygulama <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon"><i class="fa-solid fa-robot"></i></div>
+                <h3>EfeBot (ABRPSBOT)</h3>
+                <p>C# WPF mimarisi üzerine kurulu, Windows sistem tepsisinde (system tray) 7/24 sessizce çalışabilen gelişmiş Discord bot yönetim altyapısı.</p>
+                <a href="#" class="project-link">Detayları Gör <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon"><i class="fa-solid fa-gamepad"></i></div>
+                <h3>Game Development</h3>
+                <p>Lua tabanlı özel oyun mekanikleri, simülasyon sistemleri ve topluluk odaklı dijital deneyim tasarımları.</p>
+                <a href="#" class="project-link">Yakında <i class="fa-solid fa-hourglass-half"></i></a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Efe Studios. Tüm Hakları Saklıdır. Telif hakları sonsuza dek burada kalacak.</p>
+    </footer>
+
+</body>
+</html>
