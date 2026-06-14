@@ -8,17 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #060913;          /* Temiz karanlık arka plan */
-            --bg-surface: #0d1220;       /* Kart arka planı */
-            --bg-surface-hover: #131a2e; /* Hafif hover rengi */
-            --accent-cyan: #06b6d4;
+            --bg-base: #070913;          /* Gözü yormayan derin, mat gece mavisi */
+            --bg-surface: #0f1322;       /* Daha yumuşak premium kart arka planı */
+            --bg-surface-hover: #151b30; /* Akıcı geçiş için hafif hover rengi */
+            --accent-cyan: #45f3ff;      /* Parlayan siber cyan yerine mat siber neon */
             --accent-blue: #3b82f6;
             --accent-purple: #a855f7;
             --accent-orange: #f97316;
-            --accent-discord: #5865F2;  /* Orijinal Discord Rengi */
+            --accent-discord: #5865F2;  
             --text-main: #f9fafb;
-            --text-muted: #8ca3ba;
-            --border-color: rgba(255, 255, 255, 0.05);
+            --text-muted: #7e8f9f;       /* Okunabilirliği yüksek soft gri-mavi */
+            --border-color: rgba(255, 255, 255, 0.03); /* Göz tırmalamayan çok hafif sınır çizgisi */
         }
 
         * {
@@ -36,14 +36,23 @@
             min-height: 100vh;
         }
 
-        /* Hafif ve Performanslı Arka Plan Izgarası */
+        /* Gözü yormayan, kontrastı düşürülmüş mat arka plan ızgarası */
         .cyber-grid {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.008) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.008) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Arka plana gözü dinlendiren hafif, derin bir sis efekti */
+        .cyber-grid::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 20%, var(--bg-base) 80%);
             pointer-events: none;
         }
 
@@ -53,8 +62,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 8%;
-            background: #060913;
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(7, 9, 19, 0.8);
+            backdrop-filter: blur(12px); /* Modern cam efekti ile derinlik hissi */
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -62,15 +73,17 @@
 
         .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 900;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--text-main);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
 
         .logo span {
             color: var(--accent-cyan);
+            text-shadow: 0 0 15px rgba(69, 243, 255, 0.3);
         }
 
         .header-right {
@@ -82,27 +95,29 @@
         /* Discord Butonu */
         .discord-btn {
             color: var(--text-muted);
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             text-decoration: none;
-            transition: color 0.2s ease, transform 0.2s ease;
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
         }
 
         .discord-btn:hover {
             color: var(--accent-discord);
-            transform: scale(1.1);
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 8px rgba(88, 101, 242, 0.4));
         }
 
         .status-badge {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #10b981;
-            background: rgba(16, 185, 129, 0.05);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            padding: 0.4rem 1rem;
-            border-radius: 4px;
+            background: rgba(16, 185, 129, 0.03);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
             letter-spacing: 1px;
+            box-shadow: inset 0 0 10px rgba(16, 185, 129, 0.02);
         }
 
         /* Giriş (Hero) Alanı */
@@ -112,32 +127,38 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 6rem 2rem 4rem 2rem;
-            min-height: 45vh;
+            padding: 7rem 2rem 5rem 2rem;
+            min-height: 40vh;
+            position: relative;
         }
 
         .hero-tag {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--accent-cyan);
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
+            letter-spacing: 4px;
+            margin-bottom: 1.2rem;
+            opacity: 0.8;
+            text-shadow: 0 0 10px rgba(69, 243, 255, 0.2);
         }
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3.8rem;
+            font-size: 3.4rem;
             font-weight: 900;
-            letter-spacing: -1px;
-            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 1.2rem;
             color: #ffffff;
+            background: linear-gradient(180deg, #ffffff 60%, rgba(255, 255, 255, 0.6));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-muted);
-            max-width: 650px;
-            line-height: 1.6;
+            max-width: 620px;
+            line-height: 1.7;
         }
 
         /* Projeler Konteyner */
@@ -148,109 +169,152 @@
         }
 
         .section-header {
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
+            position: relative;
         }
 
         .section-header h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            letter-spacing: 1px;
-            color: var(--text-main);
+            letter-spacing: 2px;
+            color: #ffffff;
+            opacity: 0.9;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), transparent);
+            display: inline-block;
         }
 
         /* 4'lü Temiz Grid Sistemi */
         .grid-layout {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            gap: 1.25rem;
             margin-bottom: 5rem;
         }
 
         .cyber-card {
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem 1.5rem;
+            border-radius: 12px; /* Daha premium yumuşatılmış köşeler */
+            padding: 2.2rem 1.8rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                        background-color 0.3s ease, 
+                        border-color 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        /* Kartların üst kısımlarına çok hafif, göz yormayan renk sızıntısı çizgisi */
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            opacity: 0.15;
+            transition: opacity 0.3s ease;
         }
 
         .cyber-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
             background: var(--bg-surface-hover);
-            border-color: var(--accent-color);
+            border-color: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 
+                        0 0 25px rgba(var(--shadow-rgb), 0.04);
         }
 
-        /* Proje Kartı Renk Atamaları */
-        .card-kesinti { --accent-color: var(--accent-cyan); }
-        .card-bot { --accent-color: var(--accent-blue); }
-        .card-game { --accent-color: var(--accent-purple); }
-        .card-download { --accent-color: var(--accent-orange); }
+        .cyber-card:hover::before {
+            opacity: 0.7;
+        }
+
+        /* Proje Kartı Renk ve Gölge Atamaları */
+        .card-kesinti { --accent-color: var(--accent-cyan); --shadow-rgb: 69, 243, 255; }
+        .card-bot { --accent-color: var(--accent-blue); --shadow-rgb: 59, 130, 246; }
+        .card-game { --accent-color: var(--accent-purple); --shadow-rgb: 168, 85, 247; }
+        .card-download { --accent-color: var(--accent-orange); --shadow-rgb: 249, 115, 22; }
 
         .card-icon-wrapper {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: var(--accent-color);
             margin-bottom: 1.5rem;
+            display: inline-flex;
+            filter: drop-shadow(0 0 8px rgba(var(--shadow-rgb), 0.2));
         }
 
         .cyber-card h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 0.8rem;
             color: #ffffff;
+            letter-spacing: 0.5px;
         }
 
         .cyber-card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.6;
-            margin-bottom: 2rem;
+            margin-bottom: 2.2rem;
             flex-grow: 1;
         }
 
-        /* Uh Oh Durum Mesajı Stili */
+        /* Uh Oh Durum Mesajı Stili - Göz Dostu Mat Hata Kutusu */
         .empty-state-text {
             font-family: 'JetBrains Mono', monospace !important;
-            font-size: 0.85rem !important;
-            color: #ef4444 !important;
-            background: rgba(239, 68, 68, 0.05);
-            border: 1px dashed rgba(239, 68, 68, 0.2);
+            font-size: 0.8rem !important;
+            color: #f87171 !important;
+            background: rgba(239, 68, 68, 0.02);
+            border: 1px dashed rgba(239, 68, 68, 0.15);
             padding: 0.6rem;
-            border-radius: 4px;
+            border-radius: 6px;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
         .action-link {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--text-main);
+            font-size: 0.8rem;
+            color: var(--text-muted);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-weight: 700;
+            gap: 8px;
+            font-weight: 600;
+            transition: color 0.2s ease, transform 0.2s ease;
         }
 
         .cyber-card:hover .action-link {
             color: var(--accent-color);
+            transform: translateX(2px);
         }
 
-        /* Hakkımızda Bölümü - Performans Odaklı */
+        /* Hakkımızda Bölümü - Ultra Temiz Panel Görünümü */
         .about-section {
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 3rem;
-            margin-top: 2rem;
+            border-radius: 12px;
+            padding: 3rem 3.5rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .about-block {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .about-block:last-child {
@@ -259,16 +323,18 @@
 
         .about-subtitle {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--accent-cyan);
             margin-bottom: 1rem;
             letter-spacing: 2px;
             text-transform: uppercase;
+            opacity: 0.9;
+            text-shadow: 0 0 10px rgba(69, 243, 255, 0.15);
         }
 
         .about-section p {
             color: var(--text-muted);
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.8;
         }
 
@@ -278,24 +344,27 @@
 
         .about-list li {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             line-height: 1.8;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             padding-left: 1.5rem;
             position: relative;
         }
 
         .about-list li::before {
-            content: ">";
+            content: "›"; /* Daha keskin duran minimalist ok işareti */
             position: absolute;
             left: 0;
             color: var(--accent-cyan);
             font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            top: -1px;
             font-weight: 700;
         }
 
         .about-list strong {
             color: #ffffff;
+            font-weight: 600;
         }
 
         /* Alt Bilgi */
@@ -303,27 +372,29 @@
             border-top: 1px solid var(--border-color);
             padding: 2.5rem 2rem;
             text-align: center;
-            background: #060913;
+            background: #05070f;
         }
 
         footer p {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.25); /* Göz tırmalamayan çok hafif alt yazı */
+            letter-spacing: 0.5px;
         }
 
         /* Ekran Boyut Ayarları */
         @media (max-width: 1200px) {
-            .grid-layout { grid-template-columns: repeat(2, 1fr); }
-            .hero h1 { font-size: 3rem; }
+            .grid-layout { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .hero h1 { font-size: 2.8rem; }
+            .main-container { padding: 2rem 2.5rem; }
         }
 
         @media (max-width: 768px) {
             .grid-layout { grid-template-columns: 1fr; }
             .main-container { padding: 2rem 1.5rem; }
-            .hero h1 { font-size: 2.2rem; }
-            header { padding: 1rem 5%; flex-direction: column; gap: 1rem; }
-            .about-section { padding: 1.5rem; }
+            .hero h1 { font-size: 2rem; }
+            header { padding: 1.2rem 5%; flex-direction: column; gap: 1rem; }
+            .about-section { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
@@ -404,7 +475,7 @@
                         <i class="fa-solid fa-triangle-exclamation"></i> Uh Oh, Burası Boş Gözüküyor...
                     </p>
                 </div>
-                <a href="#" class="action-link" style="opacity: 0.4; pointer-events: none;">
+                <a href="#" class="action-link" style="opacity: 0.3; pointer-events: none;">
                     Arşiv Kilitli <i class="fa-solid fa-lock"></i>
                 </a>
             </div>
