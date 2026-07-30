@@ -8,17 +8,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #070913;          /* Gözü yormayan derin, mat gece mavisi */
-            --bg-surface: #0f1322;       /* Daha yumuşak premium kart arka planı */
-            --bg-surface-hover: #151b30; /* Akıcı geçiş için hafif hover rengi */
-            --accent-cyan: #45f3ff;      /* Parlayan siber cyan yerine mat siber neon */
+            --bg-base: #070913;          
+            --bg-surface: #0f1322;       
+            --bg-surface-hover: #151b30; 
+            --accent-cyan: #45f3ff;      
             --accent-blue: #3b82f6;
             --accent-purple: #a855f7;
             --accent-orange: #f97316;
             --accent-discord: #5865F2;  
+            --accent-green: #10b981;
             --text-main: #f9fafb;
-            --text-muted: #7e8f9f;       /* Okunabilirliği yüksek soft gri-mavi */
-            --border-color: rgba(255, 255, 255, 0.03); /* Göz tırmalamayan çok hafif sınır çizgisi */
+            --text-muted: #7e8f9f;       
+            --border-color: rgba(255, 255, 255, 0.03); 
         }
 
         * {
@@ -36,7 +37,6 @@
             min-height: 100vh;
         }
 
-        /* Gözü yormayan, kontrastı düşürülmüş mat arka plan ızgarası */
         .cyber-grid {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -47,7 +47,6 @@
             pointer-events: none;
         }
         
-        /* Arka plana gözü dinlendiren hafif, derin bir sis efekti */
         .cyber-grid::after {
             content: '';
             position: absolute;
@@ -56,14 +55,13 @@
             pointer-events: none;
         }
 
-        /* Üst Menü */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 8%;
             background: rgba(7, 9, 19, 0.8);
-            backdrop-filter: blur(12px); /* Modern cam efekti ile derinlik hissi */
+            backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
             position: sticky;
@@ -92,7 +90,6 @@
             gap: 1.5rem;
         }
 
-        /* Discord Butonu */
         .discord-btn {
             color: var(--text-muted);
             font-size: 1.3rem;
@@ -111,7 +108,7 @@
         .status-badge {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
-            color: #10b981;
+            color: var(--accent-green);
             background: rgba(16, 185, 129, 0.03);
             border: 1px solid rgba(16, 185, 129, 0.15);
             padding: 0.4rem 0.9rem;
@@ -120,26 +117,57 @@
             box-shadow: inset 0 0 10px rgba(16, 185, 129, 0.02);
         }
 
-        /* Giriş (Hero) Alanı */
+        .event-banner {
+            background: rgba(69, 243, 255, 0.03);
+            border: 1px solid rgba(69, 243, 255, 0.15);
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
+        }
+
+        .event-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .event-countdown {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            min-width: 140px;
+        }
+
+        .event-banner.live-mode {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+        .event-banner.live-mode .event-label { color: var(--accent-green); }
+        .event-banner.live-mode .event-countdown { color: var(--accent-green); text-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
+
         .hero {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 7rem 2rem 5rem 2rem;
+            padding: 5rem 2rem 3rem 2rem;
             min-height: 40vh;
             position: relative;
-        }
-
-        .hero-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--accent-cyan);
-            letter-spacing: 4px;
-            margin-bottom: 1.2rem;
-            opacity: 0.8;
-            text-shadow: 0 0 10px rgba(69, 243, 255, 0.2);
         }
 
         .hero h1 {
@@ -161,7 +189,6 @@
             line-height: 1.7;
         }
 
-        /* Projeler Konteyner */
         .main-container {
             max-width: 1440px;
             margin: 0 auto;
@@ -193,7 +220,6 @@
             display: inline-block;
         }
 
-        /* 4'lü Temiz Grid Sistemi */
         .grid-layout {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -204,7 +230,7 @@
         .cyber-card {
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
-            border-radius: 12px; /* Daha premium yumuşatılmış köşeler */
+            border-radius: 12px; 
             padding: 2.2rem 1.8rem;
             display: flex;
             flex-direction: column;
@@ -217,7 +243,6 @@
                         box-shadow 0.3s ease;
         }
 
-        /* Kartların üst kısımlarına çok hafif, göz yormayan renk sızıntısı çizgisi */
         .cyber-card::before {
             content: '';
             position: absolute;
@@ -239,11 +264,12 @@
             opacity: 0.7;
         }
 
-        /* Proje Kartı Renk ve Gölge Atamaları */
         .card-kesinti { --accent-color: var(--accent-cyan); --shadow-rgb: 69, 243, 255; }
         .card-bot { --accent-color: var(--accent-blue); --shadow-rgb: 59, 130, 246; }
         .card-game { --accent-color: var(--accent-purple); --shadow-rgb: 168, 85, 247; }
         .card-download { --accent-color: var(--accent-orange); --shadow-rgb: 249, 115, 22; }
+
+        .card-download.active-ginc { --accent-color: var(--accent-green); --shadow-rgb: 16, 185, 129; }
 
         .card-icon-wrapper {
             font-size: 1.6rem;
@@ -251,6 +277,7 @@
             margin-bottom: 1.5rem;
             display: inline-flex;
             filter: drop-shadow(0 0 8px rgba(var(--shadow-rgb), 0.2));
+            transition: color 0.4s ease;
         }
 
         .cyber-card h3 {
@@ -260,6 +287,7 @@
             margin-bottom: 0.8rem;
             color: #ffffff;
             letter-spacing: 0.5px;
+            transition: color 0.4s ease;
         }
 
         .cyber-card p {
@@ -270,7 +298,6 @@
             flex-grow: 1;
         }
 
-        /* Uh Oh Durum Mesajı Stili - Göz Dostu Mat Hata Kutusu */
         .empty-state-text {
             font-family: 'JetBrains Mono', monospace !important;
             font-size: 0.8rem !important;
@@ -284,6 +311,13 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
+            transition: all 0.4s ease;
+        }
+
+        .live-state-text {
+            color: var(--accent-green) !important;
+            background: rgba(16, 185, 129, 0.05) !important;
+            border: 1px solid rgba(16, 185, 129, 0.2) !important;
         }
 
         .action-link {
@@ -295,7 +329,7 @@
             align-items: center;
             gap: 8px;
             font-weight: 600;
-            transition: color 0.2s ease, transform 0.2s ease;
+            transition: color 0.2s ease, transform 0.2s ease, opacity 0.4s ease;
         }
 
         .cyber-card:hover .action-link {
@@ -303,7 +337,6 @@
             transform: translateX(2px);
         }
 
-        /* Hakkımızda Bölümü - Ultra Temiz Panel Görünümü */
         .about-section {
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
@@ -352,7 +385,7 @@
         }
 
         .about-list li::before {
-            content: "›"; /* Daha keskin duran minimalist ok işareti */
+            content: "›"; 
             position: absolute;
             left: 0;
             color: var(--accent-cyan);
@@ -367,7 +400,6 @@
             font-weight: 600;
         }
 
-        /* Alt Bilgi */
         footer {
             border-top: 1px solid var(--border-color);
             padding: 2.5rem 2rem;
@@ -378,11 +410,10 @@
         footer p {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.25); /* Göz tırmalamayan çok hafif alt yazı */
+            color: rgba(255, 255, 255, 0.25); 
             letter-spacing: 0.5px;
         }
 
-        /* Ekran Boyut Ayarları */
         @media (max-width: 1200px) {
             .grid-layout { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
             .hero h1 { font-size: 2.8rem; }
@@ -395,6 +426,7 @@
             .hero h1 { font-size: 2rem; }
             header { padding: 1.2rem 5%; flex-direction: column; gap: 1rem; }
             .about-section { padding: 2rem 1.5rem; }
+            .event-banner { flex-direction: column; gap: 0.5rem; }
         }
     </style>
 </head>
@@ -415,7 +447,13 @@
     </header>
 
     <section class="hero">
-        <div class="hero-tag">[ CORE DEV HUB ]</div>
+        <div class="event-banner" id="gincEventBanner">
+            <div class="event-label" id="eventLabelText">
+                <i class="fa-solid fa-rocket"></i> GINC ENGINE 26.1 ÇIKIŞI İÇİN SON:
+            </div>
+            <div class="event-countdown" id="countdownTimer">--:--:--</div>
+        </div>
+
         <h1>BUILDING THE FUTURE</h1>
         <p>Gelişmiş bot mimarileri, veri analiz motorları ve dinamik web servisleri ile dijital ekosistemi tasarlıyoruz.</p>
     </section>
@@ -465,17 +503,17 @@
                 </a>
             </div>
 
-            <div class="cyber-card card-download">
+            <div class="cyber-card card-download" id="downloadsCard">
                 <div>
                     <div class="card-icon-wrapper">
                         <i class="fa-solid fa-download"></i>
                     </div>
-                    <h3>Downloads</h3>
-                    <p class="empty-state-text">
+                    <h3 id="dlTitle">Downloads</h3>
+                    <p class="empty-state-text" id="dlStatus">
                         <i class="fa-solid fa-triangle-exclamation"></i> Uh Oh, Burası Boş Gözüküyor...
                     </p>
                 </div>
-                <a href="#" class="action-link" style="opacity: 0.3; pointer-events: none;">
+                <a href="#" class="action-link" id="dlLink" style="opacity: 0.3; pointer-events: none;">
                     Arşiv Kilitli <i class="fa-solid fa-lock"></i>
                 </a>
             </div>
@@ -510,5 +548,85 @@
         <p>&copy; 2026 Efe Studios. Tüm hakları saklıdır. Telif hakları sonsuza dek burada kalacak.</p>
     </footer>
 
+    <!-- JAVASCRIPT: AKILLI GERİ SAYIM VE KİLİT KIRICI -->
+    <script>
+        // HEDEF TARİH: 30 Temmuz 2026 Saat 14:30
+        const launchDate = new Date("2026-07-30T14:30:00").getTime();
+        
+        const countdownTimer = document.getElementById("countdownTimer");
+        const eventBanner = document.getElementById("gincEventBanner");
+        const eventLabelText = document.getElementById("eventLabelText");
+        
+        const downloadsCard = document.getElementById("downloadsCard");
+        const dlTitle = document.getElementById("dlTitle");
+        const dlStatus = document.getElementById("dlStatus");
+        const dlLink = document.getElementById("dlLink");
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            if (distance <= 0) {
+                // SÜRE DOLDU! GINC ENGINE ÇIKTI!
+                clearInterval(timer);
+                
+                // 1. Üstteki Event Banner'ı Güncelle (Yeşil "Yayında" Moduna Al)
+                eventBanner.classList.add("live-mode");
+                eventLabelText.innerHTML = "<i class='fa-solid fa-circle-check'></i> GINC ENGINE 26.1 BETA";
+                countdownTimer.innerHTML = "YAYINDA!";
+
+                // 2. Kilitli Olan Downloads Kartını Hackle ve Aç
+                downloadsCard.classList.add("active-ginc"); 
+                dlTitle.innerHTML = "Ginc Engine v26.1";
+                
+                dlStatus.innerHTML = "<i class='fa-solid fa-terminal'></i> Sistem Hazır. TLauncher'ı yok etme vakti.";
+                dlStatus.classList.add("live-state-text");
+                
+                // İndirme linkini aktif et ve MediaFire linkini yerleştir
+                dlLink.innerHTML = "Hemen İndir <i class='fa-solid fa-download'></i>";
+                dlLink.href = "https://www.mediafire.com/file/w2esmpbmkp9iczo/Ginc-26.1-BETA.jar/file"; 
+                dlLink.target = "_blank"; 
+                dlLink.style.opacity = "1";
+                dlLink.style.pointerEvents = "auto";
+                
+            } else {
+                // SÜRE DEVAM EDİYOR: Kalan zamanı hesapla ve ekrana yaz
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const h = String(hours).padStart(2, '0');
+                const m = String(minutes).padStart(2, '0');
+                const s = String(seconds).padStart(2, '0');
+
+                countdownTimer.innerHTML = `${h}:${m}:${s}`;
+            }
+        }, 1000);
+    </script>
+
+    <!-- SİBER KALKAN: SAĞ TIK, F12 VE KAYNAK KODU ENGELLEYİCİ -->
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                return false;
+            }
+        };
+    </script>
 </body>
 </html>
