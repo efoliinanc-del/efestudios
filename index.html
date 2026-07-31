@@ -298,6 +298,28 @@
             flex-grow: 1;
         }
 
+        /* GINC GLOBAL SAYAÇ TASARIMI */
+        .download-counter {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            margin-top: 10px;
+            background: rgba(69, 243, 255, 0.05);
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: none; 
+            border: 1px solid rgba(69, 243, 255, 0.2);
+            align-items: center;
+            gap: 8px;
+            box-shadow: inset 0 0 10px rgba(69, 243, 255, 0.05);
+        }
+        
+        .download-counter span {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
         .empty-state-text {
             font-family: 'JetBrains Mono', monospace !important;
             font-size: 0.8rem !important;
@@ -509,6 +531,10 @@
                         <i class="fa-solid fa-download"></i>
                     </div>
                     <h3 id="dlTitle">Downloads</h3>
+                    <!-- CANLI İNDİRME SAYACI BURADA -->
+                    <div class="download-counter" id="dlCounterBox">
+                        <i class="fa-solid fa-chart-line"></i> Toplam İndirme: <span id="dlCountText">...</span>
+                    </div>
                     <p class="empty-state-text" id="dlStatus">
                         <i class="fa-solid fa-triangle-exclamation"></i> Uh Oh, Burası Boş Gözüküyor...
                     </p>
@@ -548,7 +574,7 @@
         <p>&copy; 2026 Efe Studios. Tüm hakları saklıdır. Telif hakları sonsuza dek burada kalacak.</p>
     </footer>
 
-    <!-- JAVASCRIPT: AKILLI GERİ SAYIM VE KİLİT KIRICI -->
+    <!-- JAVASCRIPT: AKILLI GERİ SAYIM, KİLİT KIRICI VE GLOBAL SAYAÇ -->
     <script>
         // HEDEF TARİH: 30 Temmuz 2026 Saat 14:30
         const launchDate = new Date("2026-07-30T14:30:00").getTime();
@@ -561,6 +587,14 @@
         const dlTitle = document.getElementById("dlTitle");
         const dlStatus = document.getElementById("dlStatus");
         const dlLink = document.getElementById("dlLink");
+        
+        // SAYAÇ ELEMENTLERİ
+        const dlCounterBox = document.getElementById("dlCounterBox");
+        const dlCountText = document.getElementById("dlCountText");
+
+        // GLOBAL SAYAÇ API BİLGİLERİ 
+        const namespace = "efestudios";
+        const key = "ginc_downloads_v1";
 
         const timer = setInterval(function() {
             const now = new Date().getTime();
@@ -570,12 +604,10 @@
                 // SÜRE DOLDU! GINC ENGINE ÇIKTI!
                 clearInterval(timer);
                 
-                // 1. Üstteki Event Banner'ı Güncelle (Yeşil "Yayında" Moduna Al)
                 eventBanner.classList.add("live-mode");
                 eventLabelText.innerHTML = "<i class='fa-solid fa-circle-check'></i> GINC ENGINE 26.1 BETA";
                 countdownTimer.innerHTML = "YAYINDA!";
 
-                // 2. Kilitli Olan Downloads Kartını Hackle ve Aç
                 downloadsCard.classList.add("active-ginc"); 
                 dlTitle.innerHTML = "Ginc Engine v26.1";
                 
@@ -588,9 +620,20 @@
                 dlLink.target = "_blank"; 
                 dlLink.style.opacity = "1";
                 dlLink.style.pointerEvents = "auto";
+
+                // --- GLOBAL SAYAÇ SİSTEMİ DEVREYE GİRİYOR ---
+                dlCounterBox.style.display = "inline-flex"; 
+                
+                fetch(`https://api.counterapi.dev/v1/${namespace}/${key}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        dlCountText.innerText = data.count || 0;
+                    })
+                    .catch(error => {
+                        dlCountText.innerText = "Bağlanılamadı";
+                    });
                 
             } else {
-                // SÜRE DEVAM EDİYOR: Kalan zamanı hesapla ve ekrana yaz
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -602,6 +645,15 @@
                 countdownTimer.innerHTML = `${h}:${m}:${s}`;
             }
         }, 1000);
+
+        // TIKLANDIĞINDA GLOBAL SAYACI +1 ARTIR
+        dlLink.addEventListener("click", function() {
+            fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+                .then(response => response.json())
+                .then(data => {
+                    dlCountText.innerText = data.count;
+                });
+        });
     </script>
 
     <!-- SİBER KALKAN: SAĞ TIK, F12 VE KAYNAK KODU ENGELLEYİCİ -->
