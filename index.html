@@ -471,7 +471,7 @@
     <section class="hero">
         <div class="event-banner" id="gincEventBanner">
             <div class="event-label" id="eventLabelText">
-                <i class="fa-solid fa-rocket"></i> GINC ENGINE 26.2 ÇIKIŞI İÇİN SON:
+                <i class="fa-solid fa-rocket"></i> GINC ENGINE 26.3 ÇIKIŞI İÇİN SON:
             </div>
             <div class="event-countdown" id="countdownTimer">--:--:--</div>
         </div>
@@ -576,8 +576,8 @@
 
     <!-- JAVASCRIPT: AKILLI GERİ SAYIM, KİLİT KIRICI VE GLOBAL SAYAÇ -->
     <script>
-        // HEDEF TARİH GEÇMİŞE ÇEKİLDİ - SİSTEM ANINDA AÇILACAK!
-        const launchDate = new Date("2026-01-01T00:00:00").getTime();
+        // HEDEF TARİH 24 EKİM 2026 SAAT 12:30 OLARAK AYARLANDI
+        const launchDate = new Date("2026-10-24T12:30:00").getTime();
         
         const countdownTimer = document.getElementById("countdownTimer");
         const eventBanner = document.getElementById("gincEventBanner");
@@ -601,22 +601,23 @@
             const distance = launchDate - now;
 
             if (distance <= 0) {
-                // SÜRE DOLDU! GINC ENGINE 26.2 ÇIKTI!
+                // SÜRE DOLDU! GINC ENGINE 26.3 ÇIKTI!
                 clearInterval(timer);
                 
                 eventBanner.classList.add("live-mode");
-                eventLabelText.innerHTML = "<i class='fa-solid fa-circle-check'></i> GINC ENGINE 26.2 BETA";
-                countdownTimer.innerHTML = "YAYINDA!";
+                eventLabelText.innerHTML = "<i class='fa-solid fa-circle-check'></i> GINC ENGINE 26.3 YAYINDA";
+                countdownTimer.innerHTML = "ŞİMDİ İNDİRİLEBİLİR!";
 
                 downloadsCard.classList.add("active-ginc"); 
-                dlTitle.innerHTML = "Ginc Engine v26.2";
+                dlTitle.innerHTML = "Ginc Engine v26.3";
                 
                 dlStatus.innerHTML = "<i class='fa-solid fa-terminal'></i> Sistem Hazır. TLauncher'ı yok etme vakti.";
                 dlStatus.classList.add("live-state-text");
                 
-                // İndirme linkini aktif et ve dosya.co linkini yerleştir
+                // İndirme linkini aktif et ve GitHub üzerindeki .exe dosyasını yerleştir
                 dlLink.innerHTML = "Hemen İndir <i class='fa-solid fa-download'></i>";
-                dlLink.href = "https://dosya.co/2nboltrdld7g/Ginc_26.2.exe.html"; 
+                dlLink.href = "Ginc 26.3.exe"; 
+                dlLink.setAttribute("download", "Ginc 26.3.exe");
                 dlLink.target = "_blank"; 
                 dlLink.style.opacity = "1";
                 dlLink.style.pointerEvents = "auto";
